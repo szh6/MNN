@@ -39,6 +39,31 @@ table Convolution3DCommon {
     group:int = 1;
 }
 
+table DeformConv2DCommon {
+    padX:int = 0;
+    padY:int = 0;
+    kernelX:int = 1;
+    kernelY:int = 1;
+    strideX:int = 1;
+    strideY:int = 1;
+    dilateX:int = 1;
+    dilateY:int = 1;
+    padMode:PadMode = CAFFE;
+    groups:int = 1;
+    deform_groups:int = 1;
+    outputCount:int = 0;
+    inputCount:int = 0;
+    relu:bool=false;
+    relu6:bool=false;
+    pads:[int];
+}
+
+table DeformConv2D {
+    common:DeformConv2DCommon;
+    weight:[float];
+    bias:[float];
+}
+
 enum SparseAlgo : byte {
     RANDOM = 0,
     SIMD_OC = 1,

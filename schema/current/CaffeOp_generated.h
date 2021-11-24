@@ -16,6 +16,12 @@ struct Convolution2DCommonT;
 struct Convolution3DCommon;
 struct Convolution3DCommonT;
 
+struct DeformConv2DCommon;
+struct DeformConv2DCommonT;
+
+struct DeformConv2D;
+struct DeformConv2DT;
+
 struct SparseCommon;
 struct SparseCommonT;
 
@@ -115,6 +121,10 @@ struct EltwiseInt8T;
 inline const flatbuffers::TypeTable *Convolution2DCommonTypeTable();
 
 inline const flatbuffers::TypeTable *Convolution3DCommonTypeTable();
+
+inline const flatbuffers::TypeTable *DeformConv2DCommonTypeTable();
+
+inline const flatbuffers::TypeTable *DeformConv2DTypeTable();
 
 inline const flatbuffers::TypeTable *SparseCommonTypeTable();
 
@@ -835,6 +845,301 @@ inline flatbuffers::Offset<Convolution3DCommon> CreateConvolution3DCommon(
 }
 
 flatbuffers::Offset<Convolution3DCommon> CreateConvolution3DCommon(flatbuffers::FlatBufferBuilder &_fbb, const Convolution3DCommonT *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
+
+struct DeformConv2DCommonT : public flatbuffers::NativeTable {
+  typedef DeformConv2DCommon TableType;
+  int32_t padX;
+  int32_t padY;
+  int32_t kernelX;
+  int32_t kernelY;
+  int32_t strideX;
+  int32_t strideY;
+  int32_t dilateX;
+  int32_t dilateY;
+  PadMode padMode;
+  int32_t groups;
+  int32_t deform_groups;
+  int32_t outputCount;
+  int32_t inputCount;
+  bool relu;
+  bool relu6;
+  std::vector<int32_t> pads;
+  DeformConv2DCommonT()
+      : padX(0),
+        padY(0),
+        kernelX(1),
+        kernelY(1),
+        strideX(1),
+        strideY(1),
+        dilateX(1),
+        dilateY(1),
+        padMode(PadMode_CAFFE),
+        groups(1),
+        deform_groups(1),
+        outputCount(0),
+        inputCount(0),
+        relu(false),
+        relu6(false) {
+  }
+};
+
+struct DeformConv2DCommon FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef DeformConv2DCommonT NativeTableType;
+  static const flatbuffers::TypeTable *MiniReflectTypeTable() {
+    return DeformConv2DCommonTypeTable();
+  }
+  int32_t padX() const {
+    return GetField<int32_t>(4, 0);
+  }
+  int32_t padY() const {
+    return GetField<int32_t>(6, 0);
+  }
+  int32_t kernelX() const {
+    return GetField<int32_t>(8, 1);
+  }
+  int32_t kernelY() const {
+    return GetField<int32_t>(10, 1);
+  }
+  int32_t strideX() const {
+    return GetField<int32_t>(12, 1);
+  }
+  int32_t strideY() const {
+    return GetField<int32_t>(14, 1);
+  }
+  int32_t dilateX() const {
+    return GetField<int32_t>(16, 1);
+  }
+  int32_t dilateY() const {
+    return GetField<int32_t>(18, 1);
+  }
+  PadMode padMode() const {
+    return static_cast<PadMode>(GetField<int8_t>(20, 0));
+  }
+  int32_t groups() const {
+    return GetField<int32_t>(22, 1);
+  }
+  int32_t deform_groups() const {
+    return GetField<int32_t>(24, 1);
+  }
+  int32_t outputCount() const {
+    return GetField<int32_t>(26, 0);
+  }
+  int32_t inputCount() const {
+    return GetField<int32_t>(28, 0);
+  }
+  bool relu() const {
+    return GetField<uint8_t>(30, 0) != 0;
+  }
+  bool relu6() const {
+    return GetField<uint8_t>(32, 0) != 0;
+  }
+  const flatbuffers::Vector<int32_t> *pads() const {
+    return GetPointer<const flatbuffers::Vector<int32_t> *>(34);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyField<int32_t>(verifier, 4) &&
+           VerifyField<int32_t>(verifier, 6) &&
+           VerifyField<int32_t>(verifier, 8) &&
+           VerifyField<int32_t>(verifier, 10) &&
+           VerifyField<int32_t>(verifier, 12) &&
+           VerifyField<int32_t>(verifier, 14) &&
+           VerifyField<int32_t>(verifier, 16) &&
+           VerifyField<int32_t>(verifier, 18) &&
+           VerifyField<int8_t>(verifier, 20) &&
+           VerifyField<int32_t>(verifier, 22) &&
+           VerifyField<int32_t>(verifier, 24) &&
+           VerifyField<int32_t>(verifier, 26) &&
+           VerifyField<int32_t>(verifier, 28) &&
+           VerifyField<uint8_t>(verifier, 30) &&
+           VerifyField<uint8_t>(verifier, 32) &&
+           VerifyOffset(verifier, 34) &&
+           verifier.VerifyVector(pads()) &&
+           verifier.EndTable();
+  }
+  DeformConv2DCommonT *UnPack(const flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  void UnPackTo(DeformConv2DCommonT *_o, const flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  static flatbuffers::Offset<DeformConv2DCommon> Pack(flatbuffers::FlatBufferBuilder &_fbb, const DeformConv2DCommonT* _o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
+};
+
+struct DeformConv2DCommonBuilder {
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_padX(int32_t padX) {
+    fbb_.AddElement<int32_t>(4, padX, 0);
+  }
+  void add_padY(int32_t padY) {
+    fbb_.AddElement<int32_t>(6, padY, 0);
+  }
+  void add_kernelX(int32_t kernelX) {
+    fbb_.AddElement<int32_t>(8, kernelX, 1);
+  }
+  void add_kernelY(int32_t kernelY) {
+    fbb_.AddElement<int32_t>(10, kernelY, 1);
+  }
+  void add_strideX(int32_t strideX) {
+    fbb_.AddElement<int32_t>(12, strideX, 1);
+  }
+  void add_strideY(int32_t strideY) {
+    fbb_.AddElement<int32_t>(14, strideY, 1);
+  }
+  void add_dilateX(int32_t dilateX) {
+    fbb_.AddElement<int32_t>(16, dilateX, 1);
+  }
+  void add_dilateY(int32_t dilateY) {
+    fbb_.AddElement<int32_t>(18, dilateY, 1);
+  }
+  void add_padMode(PadMode padMode) {
+    fbb_.AddElement<int8_t>(20, static_cast<int8_t>(padMode), 0);
+  }
+  void add_groups(int32_t groups) {
+    fbb_.AddElement<int32_t>(22, groups, 1);
+  }
+  void add_deform_groups(int32_t deform_groups) {
+    fbb_.AddElement<int32_t>(24, deform_groups, 1);
+  }
+  void add_outputCount(int32_t outputCount) {
+    fbb_.AddElement<int32_t>(26, outputCount, 0);
+  }
+  void add_inputCount(int32_t inputCount) {
+    fbb_.AddElement<int32_t>(28, inputCount, 0);
+  }
+  void add_relu(bool relu) {
+    fbb_.AddElement<uint8_t>(30, static_cast<uint8_t>(relu), 0);
+  }
+  void add_relu6(bool relu6) {
+    fbb_.AddElement<uint8_t>(32, static_cast<uint8_t>(relu6), 0);
+  }
+  void add_pads(flatbuffers::Offset<flatbuffers::Vector<int32_t>> pads) {
+    fbb_.AddOffset(34, pads);
+  }
+  explicit DeformConv2DCommonBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  DeformConv2DCommonBuilder &operator=(const DeformConv2DCommonBuilder &);
+  flatbuffers::Offset<DeformConv2DCommon> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<DeformConv2DCommon>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<DeformConv2DCommon> CreateDeformConv2DCommon(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    int32_t padX = 0,
+    int32_t padY = 0,
+    int32_t kernelX = 1,
+    int32_t kernelY = 1,
+    int32_t strideX = 1,
+    int32_t strideY = 1,
+    int32_t dilateX = 1,
+    int32_t dilateY = 1,
+    PadMode padMode = PadMode_CAFFE,
+    int32_t groups = 1,
+    int32_t deform_groups = 1,
+    int32_t outputCount = 0,
+    int32_t inputCount = 0,
+    bool relu = false,
+    bool relu6 = false,
+    flatbuffers::Offset<flatbuffers::Vector<int32_t>> pads = 0) {
+  DeformConv2DCommonBuilder builder_(_fbb);
+  builder_.add_pads(pads);
+  builder_.add_inputCount(inputCount);
+  builder_.add_outputCount(outputCount);
+  builder_.add_deform_groups(deform_groups);
+  builder_.add_groups(groups);
+  builder_.add_dilateY(dilateY);
+  builder_.add_dilateX(dilateX);
+  builder_.add_strideY(strideY);
+  builder_.add_strideX(strideX);
+  builder_.add_kernelY(kernelY);
+  builder_.add_kernelX(kernelX);
+  builder_.add_padY(padY);
+  builder_.add_padX(padX);
+  builder_.add_relu6(relu6);
+  builder_.add_relu(relu);
+  builder_.add_padMode(padMode);
+  return builder_.Finish();
+}
+
+flatbuffers::Offset<DeformConv2DCommon> CreateDeformConv2DCommon(flatbuffers::FlatBufferBuilder &_fbb, const DeformConv2DCommonT *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
+
+struct DeformConv2DT : public flatbuffers::NativeTable {
+  typedef DeformConv2D TableType;
+  std::unique_ptr<DeformConv2DCommonT> common;
+  std::vector<float> weight;
+  std::vector<float> bias;
+  DeformConv2DT() {
+  }
+};
+
+struct DeformConv2D FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+  typedef DeformConv2DT NativeTableType;
+  static const flatbuffers::TypeTable *MiniReflectTypeTable() {
+    return DeformConv2DTypeTable();
+  }
+  const DeformConv2DCommon *common() const {
+    return GetPointer<const DeformConv2DCommon *>(4);
+  }
+  const flatbuffers::Vector<float> *weight() const {
+    return GetPointer<const flatbuffers::Vector<float> *>(6);
+  }
+  const flatbuffers::Vector<float> *bias() const {
+    return GetPointer<const flatbuffers::Vector<float> *>(8);
+  }
+  bool Verify(flatbuffers::Verifier &verifier) const {
+    return VerifyTableStart(verifier) &&
+           VerifyOffset(verifier, 4) &&
+           verifier.VerifyTable(common()) &&
+           VerifyOffset(verifier, 6) &&
+           verifier.VerifyVector(weight()) &&
+           VerifyOffset(verifier, 8) &&
+           verifier.VerifyVector(bias()) &&
+           verifier.EndTable();
+  }
+  DeformConv2DT *UnPack(const flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  void UnPackTo(DeformConv2DT *_o, const flatbuffers::resolver_function_t *_resolver = nullptr) const;
+  static flatbuffers::Offset<DeformConv2D> Pack(flatbuffers::FlatBufferBuilder &_fbb, const DeformConv2DT* _o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
+};
+
+struct DeformConv2DBuilder {
+  flatbuffers::FlatBufferBuilder &fbb_;
+  flatbuffers::uoffset_t start_;
+  void add_common(flatbuffers::Offset<DeformConv2DCommon> common) {
+    fbb_.AddOffset(4, common);
+  }
+  void add_weight(flatbuffers::Offset<flatbuffers::Vector<float>> weight) {
+    fbb_.AddOffset(6, weight);
+  }
+  void add_bias(flatbuffers::Offset<flatbuffers::Vector<float>> bias) {
+    fbb_.AddOffset(8, bias);
+  }
+  explicit DeformConv2DBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+        : fbb_(_fbb) {
+    start_ = fbb_.StartTable();
+  }
+  DeformConv2DBuilder &operator=(const DeformConv2DBuilder &);
+  flatbuffers::Offset<DeformConv2D> Finish() {
+    const auto end = fbb_.EndTable(start_);
+    auto o = flatbuffers::Offset<DeformConv2D>(end);
+    return o;
+  }
+};
+
+inline flatbuffers::Offset<DeformConv2D> CreateDeformConv2D(
+    flatbuffers::FlatBufferBuilder &_fbb,
+    flatbuffers::Offset<DeformConv2DCommon> common = 0,
+    flatbuffers::Offset<flatbuffers::Vector<float>> weight = 0,
+    flatbuffers::Offset<flatbuffers::Vector<float>> bias = 0) {
+  DeformConv2DBuilder builder_(_fbb);
+  builder_.add_bias(bias);
+  builder_.add_weight(weight);
+  builder_.add_common(common);
+  return builder_.Finish();
+}
+
+flatbuffers::Offset<DeformConv2D> CreateDeformConv2D(flatbuffers::FlatBufferBuilder &_fbb, const DeformConv2DT *_o, const flatbuffers::rehasher_function_t *_rehasher = nullptr);
 
 struct SparseCommonT : public flatbuffers::NativeTable {
   typedef SparseCommon TableType;
@@ -4144,6 +4449,109 @@ inline flatbuffers::Offset<Convolution3DCommon> CreateConvolution3DCommon(flatbu
       _group);
 }
 
+inline DeformConv2DCommonT *DeformConv2DCommon::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
+  auto _o = new DeformConv2DCommonT();
+  UnPackTo(_o, _resolver);
+  return _o;
+}
+
+inline void DeformConv2DCommon::UnPackTo(DeformConv2DCommonT *_o, const flatbuffers::resolver_function_t *_resolver) const {
+  (void)_o;
+  (void)_resolver;
+  { auto _e = padX(); _o->padX = _e; };
+  { auto _e = padY(); _o->padY = _e; };
+  { auto _e = kernelX(); _o->kernelX = _e; };
+  { auto _e = kernelY(); _o->kernelY = _e; };
+  { auto _e = strideX(); _o->strideX = _e; };
+  { auto _e = strideY(); _o->strideY = _e; };
+  { auto _e = dilateX(); _o->dilateX = _e; };
+  { auto _e = dilateY(); _o->dilateY = _e; };
+  { auto _e = padMode(); _o->padMode = _e; };
+  { auto _e = groups(); _o->groups = _e; };
+  { auto _e = deform_groups(); _o->deform_groups = _e; };
+  { auto _e = outputCount(); _o->outputCount = _e; };
+  { auto _e = inputCount(); _o->inputCount = _e; };
+  { auto _e = relu(); _o->relu = _e; };
+  { auto _e = relu6(); _o->relu6 = _e; };
+  { auto _e = pads(); if (_e) { _o->pads.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->pads[_i] = _e->Get(_i); } } };
+}
+
+inline flatbuffers::Offset<DeformConv2DCommon> DeformConv2DCommon::Pack(flatbuffers::FlatBufferBuilder &_fbb, const DeformConv2DCommonT* _o, const flatbuffers::rehasher_function_t *_rehasher) {
+  return CreateDeformConv2DCommon(_fbb, _o, _rehasher);
+}
+
+inline flatbuffers::Offset<DeformConv2DCommon> CreateDeformConv2DCommon(flatbuffers::FlatBufferBuilder &_fbb, const DeformConv2DCommonT *_o, const flatbuffers::rehasher_function_t *_rehasher) {
+  (void)_rehasher;
+  (void)_o;
+  struct _VectorArgs { flatbuffers::FlatBufferBuilder *__fbb; const DeformConv2DCommonT* __o; const flatbuffers::rehasher_function_t *__rehasher; } _va = { &_fbb, _o, _rehasher}; (void)_va;
+  auto _padX = _o->padX;
+  auto _padY = _o->padY;
+  auto _kernelX = _o->kernelX;
+  auto _kernelY = _o->kernelY;
+  auto _strideX = _o->strideX;
+  auto _strideY = _o->strideY;
+  auto _dilateX = _o->dilateX;
+  auto _dilateY = _o->dilateY;
+  auto _padMode = _o->padMode;
+  auto _groups = _o->groups;
+  auto _deform_groups = _o->deform_groups;
+  auto _outputCount = _o->outputCount;
+  auto _inputCount = _o->inputCount;
+  auto _relu = _o->relu;
+  auto _relu6 = _o->relu6;
+  auto _pads = _o->pads.size() ? _fbb.CreateVector(_o->pads) : 0;
+  return MNN::CreateDeformConv2DCommon(
+      _fbb,
+      _padX,
+      _padY,
+      _kernelX,
+      _kernelY,
+      _strideX,
+      _strideY,
+      _dilateX,
+      _dilateY,
+      _padMode,
+      _groups,
+      _deform_groups,
+      _outputCount,
+      _inputCount,
+      _relu,
+      _relu6,
+      _pads);
+}
+
+inline DeformConv2DT *DeformConv2D::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
+  auto _o = new DeformConv2DT();
+  UnPackTo(_o, _resolver);
+  return _o;
+}
+
+inline void DeformConv2D::UnPackTo(DeformConv2DT *_o, const flatbuffers::resolver_function_t *_resolver) const {
+  (void)_o;
+  (void)_resolver;
+  { auto _e = common(); if (_e) _o->common = std::unique_ptr<DeformConv2DCommonT>(_e->UnPack(_resolver)); };
+  { auto _e = weight(); if (_e) { _o->weight.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->weight[_i] = _e->Get(_i); } } };
+  { auto _e = bias(); if (_e) { _o->bias.resize(_e->size()); for (flatbuffers::uoffset_t _i = 0; _i < _e->size(); _i++) { _o->bias[_i] = _e->Get(_i); } } };
+}
+
+inline flatbuffers::Offset<DeformConv2D> DeformConv2D::Pack(flatbuffers::FlatBufferBuilder &_fbb, const DeformConv2DT* _o, const flatbuffers::rehasher_function_t *_rehasher) {
+  return CreateDeformConv2D(_fbb, _o, _rehasher);
+}
+
+inline flatbuffers::Offset<DeformConv2D> CreateDeformConv2D(flatbuffers::FlatBufferBuilder &_fbb, const DeformConv2DT *_o, const flatbuffers::rehasher_function_t *_rehasher) {
+  (void)_rehasher;
+  (void)_o;
+  struct _VectorArgs { flatbuffers::FlatBufferBuilder *__fbb; const DeformConv2DT* __o; const flatbuffers::rehasher_function_t *__rehasher; } _va = { &_fbb, _o, _rehasher}; (void)_va;
+  auto _common = _o->common ? CreateDeformConv2DCommon(_fbb, _o->common.get(), _rehasher) : 0;
+  auto _weight = _o->weight.size() ? _fbb.CreateVector(_o->weight) : 0;
+  auto _bias = _o->bias.size() ? _fbb.CreateVector(_o->bias) : 0;
+  return MNN::CreateDeformConv2D(
+      _fbb,
+      _common,
+      _weight,
+      _bias);
+}
+
 inline SparseCommonT *SparseCommon::UnPack(const flatbuffers::resolver_function_t *_resolver) const {
   auto _o = new SparseCommonT();
   UnPackTo(_o, _resolver);
@@ -5616,6 +6024,72 @@ inline const flatbuffers::TypeTable *Convolution3DCommonTypeTable() {
   };
   static const flatbuffers::TypeTable tt = {
     flatbuffers::ST_TABLE, 10, type_codes, type_refs, nullptr, names
+  };
+  return &tt;
+}
+
+inline const flatbuffers::TypeTable *DeformConv2DCommonTypeTable() {
+  static const flatbuffers::TypeCode type_codes[] = {
+    { flatbuffers::ET_INT, 0, -1 },
+    { flatbuffers::ET_INT, 0, -1 },
+    { flatbuffers::ET_INT, 0, -1 },
+    { flatbuffers::ET_INT, 0, -1 },
+    { flatbuffers::ET_INT, 0, -1 },
+    { flatbuffers::ET_INT, 0, -1 },
+    { flatbuffers::ET_INT, 0, -1 },
+    { flatbuffers::ET_INT, 0, -1 },
+    { flatbuffers::ET_CHAR, 0, 0 },
+    { flatbuffers::ET_INT, 0, -1 },
+    { flatbuffers::ET_INT, 0, -1 },
+    { flatbuffers::ET_INT, 0, -1 },
+    { flatbuffers::ET_INT, 0, -1 },
+    { flatbuffers::ET_BOOL, 0, -1 },
+    { flatbuffers::ET_BOOL, 0, -1 },
+    { flatbuffers::ET_INT, 1, -1 }
+  };
+  static const flatbuffers::TypeFunction type_refs[] = {
+    PadModeTypeTable
+  };
+  static const char * const names[] = {
+    "padX",
+    "padY",
+    "kernelX",
+    "kernelY",
+    "strideX",
+    "strideY",
+    "dilateX",
+    "dilateY",
+    "padMode",
+    "groups",
+    "deform_groups",
+    "outputCount",
+    "inputCount",
+    "relu",
+    "relu6",
+    "pads"
+  };
+  static const flatbuffers::TypeTable tt = {
+    flatbuffers::ST_TABLE, 16, type_codes, type_refs, nullptr, names
+  };
+  return &tt;
+}
+
+inline const flatbuffers::TypeTable *DeformConv2DTypeTable() {
+  static const flatbuffers::TypeCode type_codes[] = {
+    { flatbuffers::ET_SEQUENCE, 0, 0 },
+    { flatbuffers::ET_FLOAT, 1, -1 },
+    { flatbuffers::ET_FLOAT, 1, -1 }
+  };
+  static const flatbuffers::TypeFunction type_refs[] = {
+    DeformConv2DCommonTypeTable
+  };
+  static const char * const names[] = {
+    "common",
+    "weight",
+    "bias"
+  };
+  static const flatbuffers::TypeTable tt = {
+    flatbuffers::ST_TABLE, 3, type_codes, type_refs, nullptr, names
   };
   return &tt;
 }

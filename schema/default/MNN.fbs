@@ -155,6 +155,7 @@ enum OpType : int {
     LSTMBlockCell = 141,
     Reverse = 142,
     ROIAlign = 143,
+    DeformConv2D = 144,
 
     Plugin = 256, //The Type load from plugin
     //Training Op Start from 257
@@ -369,6 +370,7 @@ union OpParameter {
     LSTMBlockCell,
     GridSample,
     LoopParam,
+    DeformConv2D,
 }
 
 table Op {
