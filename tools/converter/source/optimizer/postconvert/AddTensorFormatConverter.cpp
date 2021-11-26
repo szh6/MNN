@@ -34,6 +34,7 @@ static FormatSetType _getFormatType(const OpT* op, MNN_DATA_FORMAT originFormat)
         case MNN::OpType_GridSample:
         case MNN::OpType_PReLU:
         case MNN::OpType_Dilation2D:
+        case MNN::OpType_DeformConv2D:
             return NC4HW4_SINGLE;
         case MNN::OpType_ConvInt8:
         case MNN::OpType_Pooling:
